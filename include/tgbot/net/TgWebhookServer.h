@@ -16,16 +16,16 @@ template<typename Protocol>
 class TgWebhookServer : public HttpServer<Protocol> {
 
 public:
-    TgWebhookServer(const typename boost::asio::basic_socket_acceptor<Protocol>::endpoint_type& endpoint, const typename HttpServer<Protocol>::ServerHandler& handler) = delete;
+    TgWebhookServer(const typename asio::basic_socket_acceptor<Protocol>::endpoint_type& endpoint, const typename HttpServer<Protocol>::ServerHandler& handler) = delete;
 
-    TgWebhookServer(const typename boost::asio::basic_socket_acceptor<Protocol>::endpoint_type& endpoint, std::string path, const EventHandler& eventHandler)
+    TgWebhookServer(const typename asio::basic_socket_acceptor<Protocol>::endpoint_type& endpoint, std::string path, const EventHandler& eventHandler)
             : HttpServer<Protocol>(endpoint,
                                    [this](const std::string& _1, const std::unordered_map<std::string, std::string>& _2) { return _handle(_1, _2); }),
               _path(std::move(path)), _eventHandler(eventHandler), _tgTypeParser()
     {
     }
 
-    TgWebhookServer(const typename boost::asio::basic_socket_acceptor<Protocol>::endpoint_type& endpoint, const Bot& bot)
+    TgWebhookServer(const typename asio::basic_socket_acceptor<Protocol>::endpoint_type& endpoint, const Bot& bot)
             : TgWebhookServer(endpoint, "/" + bot.getToken(), bot.getEventHandler())
     {
     }

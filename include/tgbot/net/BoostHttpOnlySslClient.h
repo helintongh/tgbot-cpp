@@ -6,7 +6,7 @@
 #include "tgbot/net/HttpReqArg.h"
 #include "tgbot/net/HttpParser.h"
 
-#include <boost/asio.hpp>
+#include <asio.hpp>
 
 #include <string>
 #include <vector>
@@ -14,7 +14,7 @@
 namespace TgBot {
 
 /**
- * @brief This class makes http requests via boost::asio.
+ * @brief This class makes http requests via asio.
  *
  * @ingroup net
  */
@@ -33,7 +33,7 @@ public:
     std::string makeRequest(const Url& url, const std::vector<HttpReqArg>& args) const override;
 
 private:
-    mutable boost::asio::io_service _ioService;
+    mutable asio::io_service _ioService;
     const HttpParser _httpParser;
 };
 

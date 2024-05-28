@@ -1,13 +1,13 @@
 #include "tgbot/net/BoostHttpOnlySslClient.h"
 
-#include <boost/asio/ssl.hpp>
+#include <asio/ssl.hpp>
 
 #include <cstddef>
 #include <vector>
 
 using namespace std;
-using namespace boost::asio;
-using namespace boost::asio::ip;
+using namespace asio;
+using namespace asio::ip;
 
 namespace TgBot {
 
@@ -86,7 +86,7 @@ string BoostHttpOnlySslClient::makeRequest(const Url& url, const vector<HttpReqA
     char buff[1024];
     #endif //TGBOT_CHANGE_READ_BUFFER_SIZE
 
-    boost::system::error_code error;
+    std::error_code error;
     while (!error) {
         std::size_t bytes = read(socket, buffer(buff), error);
         response += string(buff, bytes);
